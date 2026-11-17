@@ -1,4 +1,4 @@
-# CryptoPulse — Runbook
+# CryptoPulse - Runbook
 
 Data platform for a crypto feature of a fictional neobank: 6 EU countries and a pilot in KG and KZ.
 Files and the CoinGecko API are loaded on a schedule into PostgreSQL, pass through the stg → ods → datamart layers,
