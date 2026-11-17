@@ -1,0 +1,20 @@
+{
+  "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+  "database.hostname": "postgres",
+  "database.port": "5432",
+  "database.user": "orozova",
+  "database.password": "${PG_PASSWORD}",
+  "database.dbname": "aiacademy",
+  "topic.prefix": "orozova",
+  "plugin.name": "pgoutput",
+  "slot.name": "orozova_users_kyc_slot",
+  "publication.name": "orozova_users_kyc_pub",
+  "publication.autocreate.mode": "filtered",
+  "table.include.list": "orozova.users_kyc",
+  "snapshot.mode": "initial",
+  "tombstones.on.delete": "false",
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "true",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "true"
+}

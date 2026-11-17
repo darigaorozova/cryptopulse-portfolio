@@ -1,0 +1,15 @@
+# Пароль НЕ хранится в файле (НФТ-2): берётся из переменной окружения DBT_PASSWORD.
+# В Airflow её передаёт задача dbt_build из Connection aiacademy_pg_orozova.
+# В терминале: export DBT_PASSWORD='...'  (или read -s DBT_PASSWORD; export DBT_PASSWORD)
+cryptopulse_orozova:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', 'postgres') }}"
+      port: "{{ env_var('DBT_PORT', '5432') | int }}"
+      user: "{{ env_var('DBT_USER', 'orozova') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      dbname: aiacademy
+      schema: orozova_datamart
+      threads: 4

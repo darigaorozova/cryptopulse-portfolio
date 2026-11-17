@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: ods
+    description: Слой ods, который строит DAG final_orozova_pipeline (и CDC для KYC).
+    schema: orozova_ods
+    tables:
+      - name: ods_trades
+        description: Сделки, одна строка — одна сделка.
+      - name: ods_users
+        description: Справочник пользователей.
+      - name: ods_users_kyc
+        description: Текущий статус KYC (наполняется CDC из orozova.users_kyc).
+      - name: ods_coin_prices
+        description: Дневные цены монет из CoinGecko.

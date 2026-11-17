@@ -1,0 +1,19 @@
+name: cryptopulse
+version: "1.0.0"
+config-version: 2
+profile: cryptopulse_orozova
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  cryptopulse:
+    staging:
+      +materialized: view
+      +schema: orozova_ods        # представления над таблицами ods
+    marts:
+      +materialized: table
+      +schema: orozova_datamart   # витрина рядом с витринами из DAG

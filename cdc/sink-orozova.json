@@ -1,0 +1,17 @@
+{
+  "connector.class": "io.debezium.connector.jdbc.JdbcSinkConnector",
+  "topics": "orozova.orozova.users_kyc",
+  "connection.url": "jdbc:postgresql://postgres:5432/aiacademy",
+  "connection.username": "orozova",
+  "connection.password": "${PG_PASSWORD}",
+  "insert.mode": "upsert",
+  "primary.key.mode": "record_key",
+  "primary.key.fields": "user_id",
+  "delete.enabled": "true",
+  "schema.evolution": "none",
+  "table.name.format": "orozova_ods.ods_users_kyc",
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "true",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "true"
+}

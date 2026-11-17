@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: v_trades
+    description: Завершённые сделки (status = completed) из ods_trades.
+    columns:
+      - name: trade_id
+        description: Идентификатор сделки.
+        data_tests: [unique, not_null]
+
+  - name: v_users
+    description: Пользователь со страной, тарифом и текущим статусом KYC.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+
+  - name: v_btc_prices
+    description: Дневная цена BTC в EUR из CoinGecko.
+
+  - name: dm_monthly_country_plan_dbt
+    description: >
+      Месячная витрина: месяц × страна × тариф. Только завершённые сделки.
+      Должна совпадать с dm_monthly_country_plan, которую считает DAG final_orozova_datamart.
+    columns:
+      - name: month_country_plan_key
+        description: Ключ зерна — месяц|страна|тариф.
+        data_tests: [unique, not_null]
+      - name: month
+        description: Первый день месяца.
+        data_tests: [not_null]
+      - name: country_code
+        description: Страна пользователя (6 стран ЕС + пилот KG, KZ).
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['DE', 'FR', 'ES', 'IT', 'NL', 'PL', 'KG', 'KZ']
+      - name: plan
+        description: Тариф пользователя.
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['standard', 'plus', 'premium', 'metal', 'ultra']
+      - name: active_traders
+        description: Уникальные пользователи с завершённой сделкой за месяц (MAU).
+        data_tests: [not_null]
+      - name: verified_users
+        description: Пользователи страны и тарифа со статусом KYC verified.
+      - name: conversion_to_trade
+        description: active_traders / verified_users.
+      - name: completed_cnt
+        description: Число завершённых сделок.
+      - name: volume_eur
+        description: Сумма amount_eur завершённых сделок.
+        data_tests: [not_null]
+      - name: fee_revenue_eur
+        description: Сумма комиссий fee_eur — доход банка.
+        data_tests: [not_null]
+      - name: take_rate
+        description: fee_revenue_eur / volume_eur.
+      - name: avg_btc_price_eur
+        description: Средняя цена BTC за загруженные дни месяца (из API CoinGecko).
