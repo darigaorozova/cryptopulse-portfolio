@@ -22,7 +22,8 @@ The project is an end-to-end data platform for a neobank that operates in 6 EU c
 
 ## Links
 
-- Presentation: [docs/presentation.pdf](docs/presentation.pdf)
+- Presentation (English): [docs/presentation_en.pdf](docs/presentation_en.pdf)
+- Presentation (Russian): [docs/presentation.pdf](docs/presentation.pdf)
 - Dashboard: [docs/dashboard.html](docs/dashboard.html)
 - Data model: [docs/data_model.md](docs/data_model.md)
 - Dataset passport: [docs/dataset_passport.md](docs/dataset_passport.md)
